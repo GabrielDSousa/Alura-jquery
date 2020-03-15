@@ -9,6 +9,7 @@ $(function () {
     $("#botao-reiniciar").click(reiniciaJogo);
     $("#botao-placar").click(mostraPlacar);
     $("#botao-frase").click(fraseAleatoria);
+    $("#botao-frase-id").click(buscaFrase);
 });
 
 function atualizaTamanhoFrase() {
