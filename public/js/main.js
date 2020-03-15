@@ -10,6 +10,8 @@ $(function () {
     $("#botao-placar").click(mostraPlacar);
     $("#botao-frase").click(fraseAleatoria);
     $("#botao-frase-id").click(buscaFrase);
+    $("#botao-sync").click(sincronizaPlacar);
+    atualizaPlacar();
 });
 
 function atualizaTamanhoFrase() {
