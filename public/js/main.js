@@ -1,29 +1,39 @@
 var tempoInicial = $("#tempo-digitacao").text();
 var campo = $(".campo-digitacao");
 
-$(function () {
+$(function() {
     atualizaTamanhoFrase();
     inicializaContadores();
     inicializaCronometro();
     inicializaMarcadores();
     $("#botao-reiniciar").click(reiniciaJogo);
-    $("#botao-placar").click(mostraPlacar);
-    $("#botao-frase").click(fraseAleatoria);
-    $("#botao-frase-id").click(buscaFrase);
-    $("#botao-sync").click(sincronizaPlacar);
     atualizaPlacar();
+
+    $("#usuarios").selectize({
+        create: true,
+        sortField: 'text'
+    });
+
+    $(".tooltip").tooltipster({
+        trigger: "custom"
+    });
 });
+
+function atualizaTempoInicial(tempo) {
+    tempoInicial = tempo;
+    $("#tempo-digitacao").text(tempo);
+}
 
 function atualizaTamanhoFrase() {
     var frase = $(".frase").text();
-    var numPalavras = frase.split(" ").length;
+    var numPalavras  = frase.split(" ").length;
     var tamanhoFrase = $("#tamanho-frase");
 
     tamanhoFrase.text(numPalavras);
 }
 
 function inicializaContadores() {
-    campo.on("input", function () {
+    campo.on("input", function() {
         var conteudo = campo.val();
 
         var qtdPalavras = conteudo.split(/\S+/).length - 1;
@@ -35,12 +45,12 @@ function inicializaContadores() {
 }
 
 function inicializaMarcadores() {
-    campo.on("input", function () {
+    campo.on("input", function() {
         var frase = $(".frase").text();
         var digitado = campo.val();
         var comparavel = frase.substr(0, digitado.length);
 
-        if (digitado === comparavel) {
+        if (digitado == comparavel) {
             campo.addClass("borda-verde");
             campo.removeClass("borda-vermelha");
         } else {
@@ -51,16 +61,16 @@ function inicializaMarcadores() {
 }
 
 function inicializaCronometro() {
-    campo.one("focus", function () {
+    campo.one("focus", function() {
         var tempoRestante = $("#tempo-digitacao").text();
-        var cronometroID = setInterval(function () {
-            tempoRestante--;
-            $("#tempo-digitacao").text(tempoRestante);
-            if (tempoRestante < 1) {
+    	var cronometroID = setInterval(function() {
+    		tempoRestante--;
+    		$("#tempo-digitacao").text(tempoRestante);
+    		if (tempoRestante < 1) {
                 clearInterval(cronometroID);
                 finalizaJogo();
-            }
-        }, 1000);
+    		}
+    	}, 1000);
     });
 }
 
@@ -80,9 +90,4 @@ function reiniciaJogo() {
     campo.toggleClass("campo-desativado");
     campo.removeClass("borda-vermelha");
     campo.removeClass("borda-verde");
-}
-
-function atualizaTempoInicial(tempo) {
-    tempoInicial = tempo;
-    $("#tempo-digitacao").text(tempo);
 }
