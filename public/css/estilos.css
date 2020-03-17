@@ -24,3 +24,41 @@
 .borda-vermelha {
     border: 3px solid red;
 }
+
+.placar {
+    display: none;
+}
+
+body {
+    overflow: scroll;
+}
+
+#erro{
+    color: red;
+    display: none;
+}
+
+#spinner {
+    display: none;
+}
+
+#frase-id{
+    width: 40px;
+}
+
+#botao-sync{
+    float: right;
+}
+
+.select-usuarios{
+    display:inline-block;
+}
+
+#usuarios{
+    display:block;
+}
+
+.selectize-input {
+    width: 150px;
+    vertical-align: middle;
+}
